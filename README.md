@@ -1,4 +1,4 @@
-#SpeedRunsLive Electron Race App
+# SpeedRunsLive Electron Race App
 
 Currently only displays current races and indicates their number of entrants and current state
 
