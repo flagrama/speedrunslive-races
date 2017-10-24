@@ -1,20 +1,47 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import RaceList from './components/RaceList';
 import './App.css';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            races: [],
+        }
+
+        this.getRaces();
+    }
+
+    componentDidMount() {
+        this.refreshRacesInterval = setInterval(() => this.getRaces(), 300);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.refreshRacesInterval);
+    }
+
+    getRaces() {
+        return fetch('http://api.speedrunslive.com:81/races', {
+            headers: {
+                Accept: 'application/json',
+            },
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {this.setState({races: responseJson.races})})
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      return (
+        <div className="App">
+            <RaceList
+                races={this.state.races}
+            />
+        </div>
+      );
   }
 }
 
