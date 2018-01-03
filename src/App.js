@@ -8,7 +8,7 @@ class App extends Component {
 
         this.state = {
             races: [],
-        }
+        };
 
         this.getRaces();
     }

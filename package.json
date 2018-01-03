@@ -3,21 +3,36 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "electron": "^1.7.9"
+    "concurrently": "^3.5.1",
+    "electron": "^1.7.10",
+    "electron-builder": "^19.52.1",
+    "wait-on": "^2.0.2"
   },
   "dependencies": {
+    "electron-is-dev": "^0.3.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14"
   },
   "homepage": "./",
-  "main": "src/electron-starter.js",
+  "main": "public/electron-starter.js",
+  "build": {
+    "appId": "com.flagrama.speedrunslive-races",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "electron": "electron .",
-    "electron-dev": "set ELECTRON_START_URL=http://localhost:3000 && electron ."
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-pack": "build --em.main=build/electron-starter.js --ia32 --x64",
+    "preelectron-pack": "yarn build"
   }
 }
