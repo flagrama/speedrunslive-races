@@ -1,5 +1,5 @@
 {
-  "name": "speedrunslive-races-electron",
+  "name": "speedrunslive-races",
   "version": "0.2.0",
   "private": true,
   "devDependencies": {
