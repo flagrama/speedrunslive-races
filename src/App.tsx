@@ -1,24 +1,41 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import RaceList from './components/RaceList';
+import RaceListing from './types/RaceListing';
 import './App.css';
 
-class App extends Component {
-    constructor(props) {
+let refreshRacesInterval: number;
+
+interface AppState {
+    races: Array<RaceListing>;
+}
+
+export class App extends React.Component<{}, AppState> {
+    constructor(props: {}) {
         super(props);
 
         this.state = {
-            races: [],
+            races: [{
+            key: 0,
+            game: {
+                name: "",
+                abbrev: ""
+            },
+            goal: "",
+            time: 0,
+            statetext: "",
+            numentrants: 0
+            }]
         };
 
         this.getRaces();
     }
 
     componentDidMount() {
-        this.refreshRacesInterval = setInterval(() => this.getRaces(), 300);
+        refreshRacesInterval = window.setInterval(() => this.getRaces(), 300);
     }
 
     componentWillUnmount() {
-        clearInterval(this.refreshRacesInterval);
+        clearInterval(refreshRacesInterval);
     }
 
     getRaces() {
