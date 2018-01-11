@@ -8,7 +8,7 @@ interface RaceListProps {
 
 class RaceList extends React.Component<RaceListProps, {}> {
     render() {
-        const races: Array<JSX.Element> = this.props.races.map((race: any) =>(
+        const races: Array<JSX.Element> = this.props.races.map((race: any) => (
             <RaceInfo
                 key={race.id}
                 gamename={race.game.name}
@@ -24,7 +24,7 @@ class RaceList extends React.Component<RaceListProps, {}> {
             <div>
                 {races}
             </div>
-        )
+        );
     }
 }
 

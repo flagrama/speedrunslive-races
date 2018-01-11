@@ -15,14 +15,14 @@ export class App extends React.Component<{}, AppState> {
 
         this.state = {
             races: [{
-            key: 0,
+            key: -1,
             game: {
-                name: "",
-                abbrev: ""
+                name: '',
+                abbrev: ''
             },
-            goal: "",
+            goal: '',
             time: 0,
-            statetext: "",
+            statetext: '',
             numentrants: 0
             }]
         };
@@ -45,7 +45,7 @@ export class App extends React.Component<{}, AppState> {
             },
         })
         .then((response) => response.json())
-        .then((responseJson) => {this.setState({races: responseJson.races})})
+        .then((responseJson) => {this.setState({races: responseJson.races}); })
         .catch((error) => {
             console.error(error);
         });
